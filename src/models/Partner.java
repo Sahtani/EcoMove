@@ -4,28 +4,34 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public class Partner {
+
+    public enum TransportType {
+        plane, train, bus
+    }
+
+    public enum PartnerStatus{
+        active, inactive, suspended
+    }
+
     private UUID id;
     private String companyName;
     private String commercialContact;
     private String geographicalArea;
     private String specialConditions;
     private LocalDate creationDate;
-
-    public enum TransportType {
-        plane, train, bus
-    }
-    public enum partnerStatus{
-        active, inactive, suspended
-    }
+    private  TransportType transportType;
+    private  PartnerStatus partnerStatus;
 
 
     // Constructor
-    public Partner (UUID id,String companyName,String commercialContact,String geographicalArea,String specialConditions,LocalDate creationDate){
+    public Partner (UUID id,String companyName,String commercialContact,String geographicalArea,String specialConditions,LocalDate creationDate,TransportType transportType,PartnerStatus partnerStatus ){
         this.id=id;
         this.companyName=companyName;
         this.commercialContact=commercialContact;
         this.geographicalArea=geographicalArea;
         this.specialConditions=specialConditions;
+        this.transportType=transportType;
+        this.partnerStatus=partnerStatus;
     }
     //getters
     public UUID getId() {
@@ -49,6 +55,14 @@ public class Partner {
 
     public LocalDate getCreationDate(){
         return creationDate;
+    }
+
+    public PartnerStatus getPartnerStatus() {
+        return partnerStatus;
+    }
+
+    public TransportType getTransportType() {
+        return transportType;
     }
 
     //Setters
@@ -77,14 +91,11 @@ public class Partner {
         this.creationDate = creationDate;
     }
 
+    public void setPartnerStatus(PartnerStatus partnerStatus) {
+        this.partnerStatus = partnerStatus;
+    }
 
-
-
-
-
-
-
-
-
-
+    public void setTransportType(TransportType transportType) {
+        this.transportType = transportType;
+    }
 }
