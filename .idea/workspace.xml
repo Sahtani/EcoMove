@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="93d1df58-ca32-4534-bd22-912e8ed82ef7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/models/PartnerStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/TransportType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EcoMove.iml" beforeDir="false" afterPath="$PROJECT_DIR$/EcoMove.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/Db.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/Db.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/Partner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Partner.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -20,6 +20,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -63,5 +64,20 @@
       <updated>1724937863616</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/models/Partner.java</url>
+          <line>132</line>
+          <properties class="models.Partner" method="createTable">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
