@@ -1,5 +1,10 @@
 package models;
 
+import config.Db;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -98,4 +103,61 @@ public class Partner {
     public void setTransportType(TransportType transportType) {
         this.transportType = transportType;
     }
+
+    //methode to add partner in the database
+
+//    public boolean addPartner(){
+//
+//    }
+
+    //methode to create enums :
+    public static void createEnums(){
+
+        try(Connection connection=Db.getInstance("EcoMove","postgres","soumia").getConnection();
+        Statement statement=connection.createStatement()){
+
+            //create transport_type_enum :
+            String createTransportEnumSQL = "CREATE TYPE transport_type_enum AS ENUM ('AVION', 'BUS', 'TRAIN');";
+            statement.executeUpdate(createTransportEnumSQL);
+
+            // Create partner_status_enum
+            String createStatusEnumSQL = "DO $$ BEGIN " +
+                    "    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'partner_status_enum') THEN " +
+                    "        CREATE TYPE partner_status_enum AS ENUM ('ACTIVE', 'INACTIVE', 'SUSPENDED'); " +
+                    "    END IF; " +
+                    "END $$;";
+            statement.executeUpdate(createStatusEnumSQL);
+
+            System.out.println("ENUM types created or already exist.");
+
+        }catch (Exception e){
+           e.printStackTrace();
+        }
+    }
+
+    //methode to create partners table
+
+//    public static void createTable() {
+//        String sql = "CREATE TABLE IF NOT EXISTS partners (" +
+//                "id UUID PRIMARY KEY DEFAULT gen_random_uuid(), " +
+//                "company_name VARCHAR(255) NOT NULL, " +
+//                "commercial_contact VARCHAR(255) NOT NULL, " +
+//                "transport_type VARCHAR(50) NOT NULL, " +
+//                "geographic_zone VARCHAR(100) NOT NULL, " +
+//                "special_conditions TEXT, " +
+//                "partner_status VARCHAR(50) NOT NULL CHECK (partner_status IN ('ACTIVE', 'INACTIVE', 'SUSPENDED')), " +
+//                "creation_date DATE NOT NULL DEFAULT CURRENT_DATE" +
+//                ")";
+//
+//        try (Connection connection = Db.getInstance("EcoMove","postgres","soumia").getConnection();
+//             Statement statement = connection.createStatement()) {
+//
+//            statement.executeUpdate(sql);
+//            System.out.println("Table 'partners' created or already exists.");
+//
+//        } catch (SQLException e) {
+//            System.out.println("Error creating table: " + e.getMessage());
+//        }
+//    }
+
 }
