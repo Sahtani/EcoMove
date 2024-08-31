@@ -14,8 +14,6 @@ public class Main {
 
 
         UUID partnerId = UUID.randomUUID();
-//            Partner.addPartner(partnerId, "Airline Co", "John Doe", TransportType.AVION,
-//                    "North America", "Flexible cancellation policy", PartnerStatus.active);
 
                 Scanner scanner = new Scanner(System.in);
 
@@ -28,7 +26,7 @@ public class Main {
 
                 System.out.println("Enter transport type (AVION, BUS, TRAIN):");
                 String transportTypeInput = scanner.nextLine();
-                TransportType transportType = TransportType.valueOf(transportTypeInput.toUpperCase());
+                TransportType transportType = TransportType.valueOf(transportTypeInput);
 
                 System.out.println("Enter geographical zone:");
                 String geographicalZone = scanner.nextLine();
@@ -42,8 +40,8 @@ public class Main {
 
 
                 // Add the partner using the DAO
-                Partner.addPartner(partnerId, companyName, commercialContact, transportType,
-                        geographicalZone, specialConditions, partnerStatus);
+//                Partner.addPartner(partnerId, companyName, commercialContact, transportType,
+//                        geographicalZone, specialConditions, partnerStatus);
 
-}
+    }}
 

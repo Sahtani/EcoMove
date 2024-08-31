@@ -25,6 +25,9 @@ public class Partner {
 
 
     // Constructor
+    public  Partner (){
+
+    }
     public Partner (UUID id,String companyName,String commercialContact,String geographicalArea,String specialConditions,LocalDate creationDate,TransportType transportType,PartnerStatus partnerStatus ){
         this.id=id;
         this.companyName=companyName;
@@ -35,14 +38,14 @@ public class Partner {
         this.partnerStatus=partnerStatus;
     }
     //getters
-    public UUID getId() {
+    public  UUID getId() {
         return id;
     }
 
     public String getcompanyName() {
         return  companyName;
     }
-    public String  getcommercialContact(){
+    public  String  getcommercialContact(){
         return commercialContact;
     }
 
@@ -157,9 +160,7 @@ public class Partner {
     }
 
     //methode to insert Partner
-    public static void addPartner(UUID id, String companyName, String commercialContact,
-                                  TransportType transportType, String geographicalZone,
-                                  String specialConditions, PartnerStatus partnerStatus) {
+    public static void store(Partner partner) {
         String sql = "INSERT INTO partners (id, company_name, commercial_contact, transport_type, " +
                 "geographical_zone, special_conditions, partner_status, creation_date) " +
                 "VALUES (?, ?, ?, CAST(? AS transportType), ?, ?, CAST(? AS partnerStatus), CURRENT_DATE)";
@@ -168,15 +169,15 @@ public class Partner {
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
             // Set the values for the placeholders
-            pstmt.setObject(1, id);
-            pstmt.setString(2, companyName);
-            pstmt.setString(3, commercialContact);
-            pstmt.setString(4, transportType.name()); // Enum's name method returns the string representation
-            pstmt.setString(5, geographicalZone);
-            pstmt.setString(6, specialConditions);
-            pstmt.setString(7, partnerStatus.name());
+            pstmt.setObject(1,partner.getId());
+            pstmt.setString(2, partner.getcompanyName());
+            pstmt.setString(3, partner.getcommercialContact());
+            pstmt.setString(4, partner.getTransportType().name());
+            pstmt.setString(5, partner.getGeographicalArea());
+            pstmt.setString(6, partner.getSpecialConditions());
+            pstmt.setString(7, partner.getPartnerStatus().name());
 
-            // Execute the SQL to insert the data
+
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows > 0) {
                 System.out.println("Partner added successfully.");
