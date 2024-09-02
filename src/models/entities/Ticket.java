@@ -1,4 +1,4 @@
-package models;
+package models.entities;
 
 import java.sql.Date;
 import java.util.UUID;

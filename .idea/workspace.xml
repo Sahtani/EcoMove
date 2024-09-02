@@ -5,13 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="93d1df58-ca32-4534-bd22-912e8ed82ef7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/controllers/PartnerController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/ContractStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controllers/ContractController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/entities/Partner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/enums/PartnerStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/enums/TransportType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/Contract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Contract.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/Partner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Partner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/PartnerStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/PartnerStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/Db.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/Db.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/PartnerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/PartnerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Contract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/entities/Contract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/ContractStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/enums/ContractStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Partner.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/PartnerStatus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/PromotionalOffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/entities/PromotionalOffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/entities/Ticket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/TransportType.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,19 +47,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/SOUMIA/Downloads/postgresql-42.7.4.jar&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/SOUMIA/IdeaProjects/EcoMove/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/SOUMIA/Downloads/postgresql-42.7.4.jar",
+    "onboarding.tips.debug.path": "C:/Users/SOUMIA/IdeaProjects/EcoMove/src/Main.java",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\SOUMIA\IdeaProjects\EcoMove\src" />
@@ -71,22 +81,13 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/models/Partner.java</url>
-          <line>135</line>
-          <properties class="models.Partner" method="createTable">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/controllers/PartnerController.java</url>
-          <line>53</line>
+          <line>85</line>
           <properties class="controllers.PartnerController" method="addPartner">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
-          <option name="timeStamp" value="4" />
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

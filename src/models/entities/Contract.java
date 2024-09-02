@@ -1,15 +1,14 @@
-package models;
+package models.entities;
 
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
 
 import config.Db;
+import models.enums.ContractStatus;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.time.LocalDate;
 import java.sql.PreparedStatement;
 
 public class Contract {
@@ -97,13 +96,13 @@ public class Contract {
         try (Connection connection = Db.getInstance("EcoMove", "postgres", "soumia").getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
-            pstmt.setObject(1, getId()); // UUID
-            pstmt.setObject(2, getStartDate()); // LocalDate
-            pstmt.setObject(3, getEndDate()); // Date
-            pstmt.setFloat(4, getSpecialRate()); // float
-            pstmt.setString(5, getAgreementConditions()); // String
-            pstmt.setBoolean(6, isRenewable()); // boolean
-            pstmt.setString(7, getContractStatus().name()); // Enum's name method returns the string representation
+            pstmt.setObject(1, getId());
+            pstmt.setObject(2, getStartDate());
+            pstmt.setObject(3, getEndDate());
+            pstmt.setFloat(4, getSpecialRate());
+            pstmt.setString(5, getAgreementConditions());
+            pstmt.setBoolean(6, isRenewable());
+            pstmt.setString(7, getContractStatus().name());
 
             pstmt.executeUpdate();
             System.out.println("Contract stored successfully.");

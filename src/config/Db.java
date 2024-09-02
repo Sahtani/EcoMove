@@ -30,7 +30,7 @@ public class Db {
         }
     }
 
-    // Public method to provide access to the Singleton instance
+
     public static Db getInstance(String dbname, String user, String pass) {
         if (instance == null) {
             instance = new Db(dbname, user, pass);
@@ -42,4 +42,9 @@ public class Db {
     public Connection getConnection() {
         return connection;
     }
+
+    // close connection to db
+//    public void closeConnection() throws Exception {
+//        getConnection().close();
+//    }
 }

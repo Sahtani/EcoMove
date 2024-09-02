@@ -1,15 +1,16 @@
-package models;
+package models.entities;
 
 import config.Db;
+import models.enums.PartnerStatus;
+import models.enums.TransportType;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
-import java.sql.PreparedStatement;
-import models.TransportType;
-import  models.PartnerStatus;
+
+import static java.sql.DriverManager.getConnection;
 
 
 public class Partner {
@@ -22,12 +23,11 @@ public class Partner {
     private LocalDate creationDate;
     private  TransportType transportType;
     private  PartnerStatus partnerStatus;
+    private ResultSet partners = null;
+    private List<Contract> contracts;
 
 
-    // Constructor
-    public  Partner (){
 
-    }
     public Partner (UUID id,String companyName,String commercialContact,String geographicalArea,String specialConditions,LocalDate creationDate,TransportType transportType,PartnerStatus partnerStatus ){
         this.id=id;
         this.companyName=companyName;
@@ -36,6 +36,12 @@ public class Partner {
         this.specialConditions=specialConditions;
         this.transportType=transportType;
         this.partnerStatus=partnerStatus;
+        this.contracts=new ArrayList<>();
+    }
+
+    // constructor
+    public Partner (){
+
     }
     //getters
     public  UUID getId() {
@@ -68,7 +74,9 @@ public class Partner {
     public TransportType getTransportType() {
         return transportType;
     }
-
+//   public Contract getContract(){
+//
+//   }
     //Setters
 
     public void setId(UUID id) {
@@ -103,17 +111,15 @@ public class Partner {
         this.transportType = transportType;
     }
 
-    //methode to add partner in the database
-
-//    public boolean addPartner(){
-//
-//    }
+    public void setContracts(List<Contract> contracts) {
+        this.contracts = contracts;
+    }
 
     //methode to create enums :
     public static void createEnums(){
 
         try(Connection connection=Db.getInstance("EcoMove","postgres","soumia").getConnection();
-        Statement statement=connection.createStatement()){
+            Statement statement=connection.createStatement()){
 
             //create transport type :
             String sql = "CREATE TYPE transportType AS ENUM ('AVION', 'BUS', 'TRAIN');";
@@ -127,7 +133,7 @@ public class Partner {
             System.out.println("ENUM types created or already exist.");
 
         }catch (Exception e){
-           e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -159,8 +165,32 @@ public class Partner {
         }
     }
 
+    // display list of partners
+
+    public ResultSet index() {
+        String sql = "SELECT * FROM partners";
+        ResultSet resultPartners = null;
+
+        try {
+
+            Connection connection = Db.getInstance("EcoMove", "postgres", "soumia").getConnection();
+
+            PreparedStatement stmt = connection.prepareStatement(sql);
+
+            resultPartners = stmt.executeQuery();
+
+        } catch (Exception exception) {
+            System.out.println("Statement Exception: " + exception.getMessage());
+            exception.printStackTrace();
+        }
+
+        return resultPartners;
+    }
+
+
+
     //methode to insert Partner
-    public static void store(Partner partner) {
+    public  void store(Partner partner) {
         String sql = "INSERT INTO partners (id, company_name, commercial_contact, transport_type, " +
                 "geographical_zone, special_conditions, partner_status, creation_date) " +
                 "VALUES (?, ?, ?, CAST(? AS transportType), ?, ?, CAST(? AS partnerStatus), CURRENT_DATE)";
@@ -168,7 +198,7 @@ public class Partner {
         try (Connection connection = Db.getInstance("EcoMove", "postgres", "soumia").getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
-            // Set the values for the placeholders
+
             pstmt.setObject(1,partner.getId());
             pstmt.setString(2, partner.getcompanyName());
             pstmt.setString(3, partner.getcommercialContact());
@@ -188,6 +218,39 @@ public class Partner {
             e.printStackTrace();
         }
     }
+
+
+    // Méthode update Partner :
+    public Object update(UUID id) {
+        String query = "UPDATE partners SET company_name = ?, commercial_contact = ?, transport_type = ?, geographical_zone = ?, special_conditions = ?, partner_status = ?, creation_date = CURRENT_DATE WHERE id = ?";
+        try (Connection connection = Db.getInstance("EcoMove", "postgres", "soumia").getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(query)) {
+
+
+            pstmt.setString(1, getcompanyName());
+            pstmt.setString(2, getcommercialContact());
+            pstmt.setObject(6,getTransportType().toString(), java.sql.Types.OTHER);
+            pstmt.setString(4, getGeographicalArea());
+            pstmt.setString(5, getSpecialConditions());
+            pstmt.setString(6, getPartnerStatus().name());
+            pstmt.setObject(6,getPartnerStatus().toString(), java.sql.Types.OTHER);
+
+
+
+            pstmt.setObject(7, id);
+
+            int rowsUpdated = pstmt.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Partner updated successfully.");
+            } else {
+                System.out.println("No partner found with the provided id.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error updating partner: " + e.getMessage());
+        }
+        return null;
+    }
+
 
 
 
