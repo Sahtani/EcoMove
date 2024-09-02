@@ -222,23 +222,28 @@ public class Partner {
 
     // Méthode update Partner :
     public Object update(UUID id) {
-        String query = "UPDATE partners SET company_name = ?, commercial_contact = ?, transport_type = ?, geographical_zone = ?, special_conditions = ?, partner_status = ?, creation_date = CURRENT_DATE WHERE id = ?";
-        try (Connection connection = Db.getInstance("EcoMove", "postgres", "soumia").getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(query)) {
+        // Print the UUID for debugging
+        System.out.printf("UUID provided: %s%n", id);
 
+        String query = "UPDATE partners SET company_name = ?, commercial_contact = ?, transport_type = ?, geographical_zone = ?, special_conditions = ?, partner_status = ? WHERE id = ?";
 
+        try {
+            Connection connection = Db.getInstance("EcoMove", "postgres", "soumia").getConnection();
+            PreparedStatement pstmt = connection.prepareStatement(query);
+
+            // Set the values for the query parameters
             pstmt.setString(1, getcompanyName());
             pstmt.setString(2, getcommercialContact());
-            pstmt.setObject(6,getTransportType().toString(), java.sql.Types.OTHER);
+            pstmt.setObject(3, getTransportType().toString(), java.sql.Types.OTHER); // Assuming getTransportType() returns an enum or object with a valid string representation
             pstmt.setString(4, getGeographicalArea());
             pstmt.setString(5, getSpecialConditions());
-            pstmt.setString(6, getPartnerStatus().name());
-            pstmt.setObject(6,getPartnerStatus().toString(), java.sql.Types.OTHER);
+            pstmt.setObject(6, getPartnerStatus().toString(), java.sql.Types.OTHER); // Assuming getPartnerStatus() returns an enum
+            pstmt.setObject(7, id, java.sql.Types.OTHER); // Correctly set the UUID
 
+            // Print the UUID again after setting it
+            System.out.printf("UUID set in PreparedStatement: %s%n", id);
 
-
-            pstmt.setObject(7, id);
-
+            // Execute the update
             int rowsUpdated = pstmt.executeUpdate();
             if (rowsUpdated > 0) {
                 System.out.println("Partner updated successfully.");
@@ -248,9 +253,9 @@ public class Partner {
         } catch (SQLException e) {
             System.err.println("Error updating partner: " + e.getMessage());
         }
+
         return null;
     }
-
 
 
 

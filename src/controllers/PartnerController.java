@@ -121,33 +121,22 @@ public class PartnerController {
         try {
             System.out.printf("# > Enter Partner UUID: ");
             UUID id = UUID.fromString(this.scanner.nextLine().strip());
-
+            System.out.printf(String.valueOf(id));
             System.out.printf("# > Enter Company Name: ");
             partner.setCompanyName(this.scanner.nextLine().strip());
-
-            System.out.printf("# > Enter Commercial Contact: ");
-            partner.setCommercialContact(this.scanner.nextLine().strip());
-
             System.out.printf("# > Enter Transport Type (AVION, BUS, TRAIN): ");
             String transportTypeInput = this.scanner.nextLine().strip();
             partner.setTransportType(TransportType.valueOf(transportTypeInput.toUpperCase()));
-
+            System.out.printf("# > Enter Commercial Contact: ");
+            partner.setCommercialContact(this.scanner.nextLine().strip());
             System.out.printf("# > Enter Geographical Zone: ");
             partner.setGeographicalArea(this.scanner.nextLine().strip());
-
             System.out.printf("# > Enter Special Conditions: ");
             partner.setSpecialConditions(this.scanner.nextLine().strip());
-
             System.out.printf("# > Enter Partner Status (ACTIVE, INACTIVE, SUSPENDED): ");
             String partnerStatusInput = this.scanner.nextLine().strip();
             partner.setPartnerStatus(PartnerStatus.valueOf(partnerStatusInput));
-
-
-            partner.setCreationDate(LocalDate.now());
-
-
             Object updateResult = partner.update(id);
-
             if (updateResult != null) {
                 System.out.printf("---------------------------------------------%n");
                 System.out.printf(" Update successful: %s%n", updateResult);
@@ -155,7 +144,6 @@ public class PartnerController {
             } else {
                 System.out.printf("No partner was updated. Please check the UUID and try again.%n");
             }
-
         } catch (IllegalArgumentException e) {
             System.out.printf("Invalid input provided: %s. Please enter valid values.%n", e.getMessage());
         } catch (Exception e) {
