@@ -115,9 +115,9 @@ public class Main {
             scanner.nextLine();
             switch (choice) {
 
-                case 1 -> partnerController.addPartner();
-                case 2 -> contractController.createContract();
-                case 3 -> partnerController.index();
+                case 1 ->  partnerController.indexPartner();
+                case 2 -> contractController.indexContract();
+
                 case 0 -> {
                     System.out.printf("---------------------------------------------%n");
                     System.out.printf("|                    Exit                   |%n");

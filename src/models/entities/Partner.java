@@ -231,16 +231,16 @@ public class Partner {
             Connection connection = Db.getInstance("EcoMove", "postgres", "soumia").getConnection();
             PreparedStatement pstmt = connection.prepareStatement(query);
 
-            // Set the values for the query parameters
+
             pstmt.setString(1, getcompanyName());
             pstmt.setString(2, getcommercialContact());
-            pstmt.setObject(3, getTransportType().toString(), java.sql.Types.OTHER); // Assuming getTransportType() returns an enum or object with a valid string representation
+            pstmt.setObject(3, getTransportType().toString(), java.sql.Types.OTHER);
             pstmt.setString(4, getGeographicalArea());
             pstmt.setString(5, getSpecialConditions());
-            pstmt.setObject(6, getPartnerStatus().toString(), java.sql.Types.OTHER); // Assuming getPartnerStatus() returns an enum
-            pstmt.setObject(7, id, java.sql.Types.OTHER); // Correctly set the UUID
+            pstmt.setObject(6, getPartnerStatus().toString(), java.sql.Types.OTHER);
+            pstmt.setObject(7, id, java.sql.Types.OTHER);
 
-            // Print the UUID again after setting it
+
             System.out.printf("UUID set in PreparedStatement: %s%n", id);
 
             // Execute the update
@@ -256,6 +256,30 @@ public class Partner {
 
         return null;
     }
+
+    //Remove sepcific Partner :
+
+    public String destroy(UUID id) {
+        String resultMessage;
+        try {
+            Connection connection = Db.getInstance("EcoMove", "postgres", "soumia").getConnection();
+
+            PreparedStatement pstmt = connection.prepareStatement("DELETE FROM partners WHERE id = ?");
+            pstmt.setObject(1, id, java.sql.Types.OTHER);  // Correct parameter index
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                resultMessage = "Partner deleted successfully.";
+            } else {
+                resultMessage = "No partner found with the provided UUID.";
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            resultMessage = "An error occurred while trying to delete the partner.";
+        }
+        return resultMessage;
+    }
+
 
 
 

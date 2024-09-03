@@ -10,11 +10,13 @@ import models.enums.ContractStatus;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
+import java.util.concurrent.LinkedBlockingDeque;
 
 public class Contract {
 
 
     private UUID id;
+    private UUID partnerId;
     private LocalDate startDate;
     private Date endDate;
     private float specialRate;
@@ -32,10 +34,17 @@ public class Contract {
         this.contractStatus=contractStatus;
     }
 
+    // constructor
+    public Contract (){
+
+    }
+
     //Getters
     public UUID getId() {
         return id;
     }
+
+    public UUID getPartnerId(){return  partnerId;}
 
     public LocalDate getStartDate() {
         return startDate;
@@ -57,7 +66,7 @@ public class Contract {
         return renewable;
     }
 
-    public ContractStatus getContractStatus(){
+    public ContractStatus getContractStatus() {
         return contractStatus;
     }
 
@@ -86,24 +95,44 @@ public class Contract {
         this.renewable = renewable;
     }
 
-    public void setContractStatus(ContractStatus contractStatus) {
+    public String setContractStatus(ContractStatus contractStatus) {
         this.contractStatus = contractStatus;
+        return null ;
     }
 
+//    public index(){
+//
+//    }
+
+
     public void store() {
-        String sql = "INSERT INTO contracts (id, start_date, end_date, special_rate, agreement_conditions, renewable, contract_status) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO contracts (id, partner_id, start_date, end_date, special_rate, agreement_conditions, renewable, contract_status) VALUES (?, ?, ?, ?, ?, ?, ?, CAST(? AS contractStatus))";
 
         try (Connection connection = Db.getInstance("EcoMove", "postgres", "soumia").getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
-            pstmt.setObject(1, getId());
-            pstmt.setObject(2, getStartDate());
-            pstmt.setObject(3, getEndDate());
-            pstmt.setFloat(4, getSpecialRate());
-            pstmt.setString(5, getAgreementConditions());
-            pstmt.setBoolean(6, isRenewable());
-            pstmt.setString(7, getContractStatus().name());
+            // Définir les paramètres de la requête
+            pstmt.setObject(1, this.getId()); // UUID
+            pstmt.setObject(2, this.getPartnerId()); // UUID
+            pstmt.setObject(3, this.getStartDate()); // LocalDate
+            if (this.getEndDate() != null) {
+                pstmt.setObject(4, this.getEndDate()); // LocalDate
+            } else {
+                pstmt.setNull(4, java.sql.Types.DATE); // End date can be null
+            }
+            pstmt.setFloat(5, this.getSpecialRate()); // Float
+            pstmt.setString(6, this.getAgreementConditions()); // String
+            pstmt.setBoolean(7, this.isRenewable()); // Boolean
 
+            ContractStatus status = this.getContractStatus();
+            if (status != null) {
+                System.out.printf("hi");
+                pstmt.setString(8, status.name()); // Enum as String
+            } else {
+                pstmt.setNull(8, java.sql.Types.VARCHAR); // Contract status can be null
+            }
+
+            // Exécuter la requête
             pstmt.executeUpdate();
             System.out.println("Contract stored successfully.");
 
@@ -111,6 +140,7 @@ public class Contract {
             System.out.println("Error storing contract: " + e.getMessage());
         }
     }
+
 
 
 }

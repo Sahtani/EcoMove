@@ -6,8 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="93d1df58-ca32-4534-bd22-912e8ed82ef7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/ContractController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/ContractController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/PartnerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/PartnerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/entities/Contract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/entities/Contract.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/entities/Partner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/entities/Partner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/enums/ContractStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/enums/ContractStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/enums/TransportType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/enums/TransportType.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
