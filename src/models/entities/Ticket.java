@@ -1,17 +1,14 @@
 package models.entities;
 
+import models.enums.TicketStatus;
+
 import java.sql.Date;
 import java.util.UUID;
+import models.enums.TransportType;
+
 
 public class Ticket {
 
-    public enum TransportType {
-        AIR, BUS, RAIL, SEA
-    }
-
-    public enum TicketStatus {
-        PURCHASED, CANCELLED, REFUNDED, PENDING
-    }
 
     private UUID id;
     private TransportType transportType;
@@ -80,5 +77,7 @@ public class Ticket {
     public void setTicketStatus(TicketStatus ticketStatus) {
         this.ticketStatus = ticketStatus;
     }
+
+
 
 }

@@ -2,49 +2,33 @@ package config;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class Db {
 
     private static Db instance;
     private Connection connection;
-    private String dbname;
-    private String user;
-    private String pass;
+    private static final String DB_URL = "jdbc:postgresql://localhost:5432/EcoMove";
+    private static final String USER = "postgres";
+    private static final String PASS = "soumia";
 
-    //constructor
-    private Db(String dbname, String user, String pass) {
-        this.dbname = dbname;
-        this.user = user;
-        this.pass = pass;
-
+    private Db() {
         try {
             Class.forName("org.postgresql.Driver");
-            this.connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/" + dbname, user, pass);
-            if (this.connection != null) {
-                System.out.println("Connection established");
-            } else {
-                System.out.println("Connection failed");
-            }
+            this.connection = DriverManager.getConnection(DB_URL, USER, PASS);
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
-
-    public static Db getInstance(String dbname, String user, String pass) {
+    public static  Db getInstance() {
         if (instance == null) {
-            instance = new Db(dbname, user, pass);
+            instance = new Db();
         }
         return instance;
     }
 
-    // Method to get the connection
     public Connection getConnection() {
         return connection;
     }
-
-    // close connection to db
-//    public void closeConnection() throws Exception {
-//        getConnection().close();
-//    }
 }

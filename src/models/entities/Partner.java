@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static java.sql.DriverManager.getConnection;
-
 
 public class Partner {
 
@@ -25,8 +23,7 @@ public class Partner {
     private  PartnerStatus partnerStatus;
     private ResultSet partners = null;
     private List<Contract> contracts;
-
-
+    private Connection connection;
 
     public Partner (UUID id,String companyName,String commercialContact,String geographicalArea,String specialConditions,LocalDate creationDate,TransportType transportType,PartnerStatus partnerStatus ){
         this.id=id;
@@ -40,8 +37,8 @@ public class Partner {
     }
 
     // constructor
-    public Partner (){
-
+    public Partner() {
+            this.connection = Db.getInstance().getConnection();
     }
     //getters
     public  UUID getId() {
@@ -115,56 +112,6 @@ public class Partner {
         this.contracts = contracts;
     }
 
-    //methode to create enums :
-    public static void createEnums(){
-
-        try(Connection connection=Db.getInstance("EcoMove","postgres","soumia").getConnection();
-            Statement statement=connection.createStatement()){
-
-            //create transport type :
-            String sql = "CREATE TYPE transportType AS ENUM ('AVION', 'BUS', 'TRAIN');";
-            statement.executeUpdate(sql);
-
-            // Create partner status
-            String requete = "CREATE TYPE partnerStatus AS ENUM ('ACTIVE', 'INACTIVE', 'SUSPENDED');";
-
-            statement.executeUpdate(requete);
-
-            System.out.println("ENUM types created or already exist.");
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    //methode to create partners table
-
-    public static void createTable() {
-        String sql = "CREATE TABLE IF NOT EXISTS partners (" +
-                "id UUID PRIMARY KEY, " +
-                "company_name VARCHAR(255) NOT NULL, " +
-                "commercial_contact VARCHAR(255) NOT NULL, " +
-                "transport_type transportType NOT NULL, " +
-                "geographical_zone VARCHAR(255) NOT NULL, " +
-                "special_conditions TEXT, " +
-                "partner_status partnerStatus NOT NULL, " +
-                "creation_date DATE NOT NULL" +
-                ");";
-
-        try (Connection connection = Db.getInstance("EcoMove", "postgres", "soumia").getConnection();
-             Statement stmt = connection.createStatement()) {
-
-
-            stmt.executeUpdate(sql);
-
-            System.out.println("Table 'partners' created successfully.");
-
-        } catch (SQLException e) {
-            System.out.println("Error creating table: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
     // display list of partners
 
     public ResultSet index() {
@@ -172,8 +119,6 @@ public class Partner {
         ResultSet resultPartners = null;
 
         try {
-
-            Connection connection = Db.getInstance("EcoMove", "postgres", "soumia").getConnection();
 
             PreparedStatement stmt = connection.prepareStatement(sql);
 
@@ -195,8 +140,7 @@ public class Partner {
                 "geographical_zone, special_conditions, partner_status, creation_date) " +
                 "VALUES (?, ?, ?, CAST(? AS transportType), ?, ?, CAST(? AS partnerStatus), CURRENT_DATE)";
 
-        try (Connection connection = Db.getInstance("EcoMove", "postgres", "soumia").getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
 
             pstmt.setObject(1,partner.getId());
@@ -222,13 +166,9 @@ public class Partner {
 
     // Méthode update Partner :
     public Object update(UUID id) {
-        // Print the UUID for debugging
-        System.out.printf("UUID provided: %s%n", id);
 
         String query = "UPDATE partners SET company_name = ?, commercial_contact = ?, transport_type = ?, geographical_zone = ?, special_conditions = ?, partner_status = ? WHERE id = ?";
-
         try {
-            Connection connection = Db.getInstance("EcoMove", "postgres", "soumia").getConnection();
             PreparedStatement pstmt = connection.prepareStatement(query);
 
 
@@ -262,10 +202,8 @@ public class Partner {
     public String destroy(UUID id) {
         String resultMessage;
         try {
-            Connection connection = Db.getInstance("EcoMove", "postgres", "soumia").getConnection();
-
             PreparedStatement pstmt = connection.prepareStatement("DELETE FROM partners WHERE id = ?");
-            pstmt.setObject(1, id, java.sql.Types.OTHER);  // Correct parameter index
+            pstmt.setObject(1, id, java.sql.Types.OTHER);
             int rowsAffected = pstmt.executeUpdate();
 
             if (rowsAffected > 0) {

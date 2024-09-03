@@ -80,13 +80,15 @@
 //
 //                // Add the partner using the DAO
 ////                Partner.addPartner(partnerId, companyName, commercialContact, transportType,
-////                        geographicalZone, specialConditions, part
+////                        geographicalZone, speci
 
 
 
+import config.Db;
 import controllers.ContractController;
 import controllers.PartnerController;
 
+import java.sql.Connection;
 import java.util.Scanner;
 
 public class Main {
@@ -95,6 +97,7 @@ public class Main {
     }
 
     public static void mainMenu() {
+
         PartnerController partnerController = new PartnerController();
         ContractController contractController=new ContractController();
         Scanner scanner = new Scanner(System.in);

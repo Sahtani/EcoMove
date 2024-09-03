@@ -5,14 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="93d1df58-ca32-4534-bd22-912e8ed82ef7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/models/enums/TicketStatus.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/Db.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/Db.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/ContractController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/ContractController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/PartnerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/PartnerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/entities/Contract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/entities/Contract.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/entities/Partner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/entities/Partner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/entities/PromotionalOffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/entities/PromotionalOffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/entities/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/entities/Ticket.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/enums/ContractStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/enums/ContractStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/enums/TransportType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/enums/TransportType.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,12 +77,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/controllers/PartnerController.java</url>
-          <line>85</line>
-          <properties class="controllers.PartnerController" method="addPartner">
+          <line>124</line>
+          <properties class="controllers.PartnerController" method="updatePartner">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
-          <option name="timeStamp" value="8" />
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

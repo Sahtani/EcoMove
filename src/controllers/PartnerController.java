@@ -1,11 +1,13 @@
 package controllers;
 
+import config.Db;
 import models.entities.Partner;
 import models.enums.PartnerStatus;
 import models.enums.TransportType;
 
 import java.awt.*;
 import java.awt.dnd.DropTargetEvent;
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.time.LocalDate;
@@ -16,8 +18,11 @@ import java.util.UUID;
 
 public class PartnerController {
 
-    private Partner partner = new Partner();
+
     private Scanner scanner =new Scanner(System.in);
+    private Partner partner = new Partner();
+
+
 
     // Principal menu :
     public void indexPartner() {
@@ -58,7 +63,7 @@ public class PartnerController {
             System.out.printf("# %-20s | %-20s | %-20s | %-20s | %-20s | %-20s #%n",
                     "UUID id", "Company Name", "Commercial Contact", "Geographical Area", "Transport Type", "Status");
             System.out.printf("-------------------------------------------------------------------------------------------------------------------------------------------------------------%n");
-                Partner book = new Partner();
+
             ResultSet resultPartners = partner.index();
 
             while (resultPartners.next()) {
@@ -107,7 +112,7 @@ public class PartnerController {
 
 
             System.out.printf("---------------------------------------------%n");
-            System.out.printf("             %13s          %n");
+
             System.out.printf("---------------------------------------------%n");
 
         }catch (Exception e) {
@@ -138,7 +143,7 @@ public class PartnerController {
             partner.setPartnerStatus(PartnerStatus.valueOf(partnerStatusInput));
             Object updateResult = partner.update(id);
             if (updateResult != null) {
-                System.out.println(updateResult);  // Directly prints the object
+                System.out.println(updateResult);
                 System.out.printf("---------------------------------------------%n");
                 System.out.printf(" Update successful: %s%n", updateResult.toString());
                 System.out.printf("---------------------------------------------%n");
