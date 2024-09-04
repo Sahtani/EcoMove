@@ -99,20 +99,19 @@ public class Ticket {
 
     // display tickets :
     public ResultSet displayTickets() {
-        String sql = "SELECT * FROM promotions";
-        ResultSet resultPromotions = null;
+        String sql = "SELECT * FROM ticket";
+        ResultSet result = null;
 
         try {
-
             PreparedStatement stmt = connection.prepareStatement(sql);
-            resultPromotions = stmt.executeQuery();
+            result = stmt.executeQuery();
 
         } catch (Exception exception) {
             System.out.println("Statement Exception: " + exception.getMessage());
             exception.printStackTrace();
         }
 
-        return resultPromotions;
+        return result;
     }
 
 
@@ -145,6 +144,35 @@ public class Ticket {
             return false;
         }
     }
+
+    // update the ticket :
+
+    public boolean updateTicket(UUID id) {
+        String query = "UPDATE ticket SET transporttype = ?, purchaseprice = ?, saleprice = ?, saledate = ?, ticketstatus = ?, contractid = ? WHERE id = ?";
+
+        try  {
+
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setObject(1, this.getTransportType().toString(), java.sql.Types.OTHER);
+            pstmt.setFloat(2, this.getPurchasePrice());
+            pstmt.setFloat(3, this.getSalePrice());
+            pstmt.setTimestamp(4, this.getSaleDate());
+            pstmt.setObject(5, this.getTicketStatus().toString(), java.sql.Types.OTHER);
+            pstmt.setObject(6, this.getContractId(), java.sql.Types.OTHER);
+
+
+            pstmt.setObject(7, id, java.sql.Types.OTHER);
+
+            int affectedRows = pstmt.executeUpdate();
+
+            return affectedRows > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
 
 }

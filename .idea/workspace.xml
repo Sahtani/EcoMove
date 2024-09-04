@@ -6,14 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="93d1df58-ca32-4534-bd22-912e8ed82ef7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/ContractController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/ContractController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/PromotionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/PromotionController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/TicketController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/TicketController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/entities/Partner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/entities/Partner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/entities/PromotionalOffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/entities/PromotionalOffer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/entities/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/entities/Ticket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/enums/TicketStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/enums/TicketStatus.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,6 +77,15 @@
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/controllers/TicketController.java</url>
+          <line>57</line>
+          <properties class="controllers.TicketController" method="ticketList">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

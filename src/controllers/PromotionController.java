@@ -54,7 +54,7 @@ public class PromotionController {
     public void promotionsList() {
         try {
             System.out.printf("-------------------------------------------------------------------------------------------------------------------------------------------------------------%n");
-            System.out.printf("# %-36s | %-20s | %-20s | %-20s | %-20s | %-20s | %-20s | %-36s | %-20s #%n",
+            System.out.printf("# %-36s | %-20s | %-20s | %-20s | %-20s | %-20s | %-20s | %-36s | %-36s #%n",
                     "UUID id", "Offer Name", "Description", "Start Date", "End Date", "Discount Type", "Conditions", "Contract ID", "Offer Status");
             System.out.printf("-------------------------------------------------------------------------------------------------------------------------------------------------------------%n");
 
