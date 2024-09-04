@@ -109,9 +109,9 @@ public class Contract {
 
 
 
-    // display list of partners
+    // display list of contracts
 
-    public ResultSet index() {
+    public ResultSet diplayContracts() {
         String sql = "SELECT * FROM contracts";
         ResultSet resultPartners = null;
 

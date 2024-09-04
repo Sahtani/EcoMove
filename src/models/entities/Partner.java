@@ -140,9 +140,9 @@ public class Partner {
                 "geographical_zone, special_conditions, partner_status, creation_date) " +
                 "VALUES (?, ?, ?, CAST(? AS transportType), ?, ?, CAST(? AS partnerStatus), CURRENT_DATE)";
 
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+        try  {
 
-
+            PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setObject(1,partner.getId());
             pstmt.setString(2, partner.getcompanyName());
             pstmt.setString(3, partner.getcommercialContact());

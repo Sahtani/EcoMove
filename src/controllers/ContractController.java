@@ -59,7 +59,7 @@ public class ContractController {
                     "Contract ID", "Partner ID", "Start Date", "End Date", "Special Rate", "Agreement Conditions", "Renewable", "Status");
             System.out.printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%n");
 
-            ResultSet resultContracts = contract.index();
+            ResultSet resultContracts = contract.diplayContracts();
 
             while (resultContracts.next()) {
                 System.out.printf("# %-36s | %-36s | %-10s | %-10s | %-12.2f | %-30s | %-10b | %-18s #%n",
@@ -131,19 +131,13 @@ public class ContractController {
     // update contrat
     public void updateContract() {
         try {
-            // Demande de l'UUID du contrat à mettre à jour
+
             System.out.printf("# > Enter Contract UUID: ");
             UUID id = UUID.fromString(this.scanner.nextLine().strip());
             System.out.printf("Contract ID: %s%n", id);
 
-
-            // Récupération et mise à jour des attributs du contrat
-
             contract.setId(id);
 
-//            System.out.printf("# > Enter Partner ID (UUID): ");
-//            UUID partnerId = UUID.fromString(this.scanner.nextLine().strip());
-//            contract.setPartnerId(partnerId);
 
             System.out.printf("# > Enter Start Date (YYYY-MM-DD): ");
             LocalDate startDate = LocalDate.parse(this.scanner.nextLine().strip());
@@ -177,7 +171,6 @@ public class ContractController {
                 contract.setContractStatus(contractStatus);
             }
 
-            // Appel de la méthode pour mettre à jour le contrat
             Object updateResult = contract.update(id);
             if (updateResult != null) {
                 System.out.printf("---------------------------------------------%n");

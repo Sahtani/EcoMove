@@ -20,9 +20,9 @@ public class PromotionController {
             int choice;
             do {
                 promotionsList();
-                System.out.printf("#   1. Add new Partner                       %n");
-                System.out.printf("#   2. Edit a Partner                       %n");
-                System.out.printf("#   3. Delete a Partner                     %n");
+                System.out.printf("#   1. Add new Promotion                       %n");
+                System.out.printf("#   2. Edit a Promotion                       %n");
+                System.out.printf("#   3. Delete a Promotion                     %n");
                 System.out.printf("#   0. Main Menu                         %n");
                 System.out.printf("# > Enter a number: ");
                 choice = this.scanner.nextInt();
@@ -58,8 +58,7 @@ public class PromotionController {
                     "UUID id", "Offer Name", "Description", "Start Date", "End Date", "Discount Type", "Conditions", "Contract ID", "Offer Status");
             System.out.printf("-------------------------------------------------------------------------------------------------------------------------------------------------------------%n");
 
-            ResultSet resultPromotions = promo.displayromotions();  // Assume that `promotion.index()` returns the ResultSet containing promotion data.
-
+            ResultSet resultPromotions = promo.displayPromotions();
             while (resultPromotions.next()) {
                 System.out.printf("# %-36s | %-20s | %-20s | %-20s | %-20s | %-20s | %-20s | %-36s | %-20s #%n",
                         resultPromotions.getString("id"),
@@ -153,10 +152,6 @@ public class PromotionController {
             String discountTypeInput = scanner.nextLine().strip();
             promo.setDiscountType(DiscountType.valueOf(discountTypeInput.toLowerCase()));
 
-//            System.out.print("# > Enter Contract Status (ongoing, completed, suspended): ");
-//            String contractStatus = this.scanner.nextLine().strip();
-//            contract.setContractStatus(ContractStatus.valueOf(contractStatus));
-//
             System.out.printf("# > Enter Conditions: ");
             promo.setConditions(scanner.nextLine().strip());
 
@@ -189,7 +184,7 @@ public class PromotionController {
     // delete a promotion
     public void deletePromotion() {
         try {
-            System.out.printf("# > Enter Partner id: ");
+            System.out.printf("# > Enter Promotion id: ");
             UUID id = UUID.fromString(this.scanner.nextLine().strip());
             System.out.printf("---------------------------------------------%n");
             System.out.printf("             %13s          %n", promo.destroy(id));

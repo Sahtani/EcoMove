@@ -88,6 +88,7 @@ import config.Db;
 import controllers.ContractController;
 import controllers.PartnerController;
 import controllers.PromotionController;
+import controllers.TicketController;
 
 import java.sql.Connection;
 import java.util.Scanner;
@@ -102,6 +103,7 @@ public class Main {
         PartnerController partnerController = new PartnerController();
         ContractController contractController=new ContractController();
         PromotionController promotionController=new PromotionController();
+        TicketController ticketController=new TicketController();
 
         Scanner scanner = new Scanner(System.in);
         int choice = 0;
@@ -114,7 +116,7 @@ public class Main {
             System.out.printf("#      1. Gestion des partenariats                            #%n");
             System.out.printf("#      2. Gestion des contrats :                         #%n");
             System.out.printf("#      3. Gestion des offres promotionnelles:                            #%n");
-            System.out.printf("#      3. Gestion des Billets:                            #%n");
+            System.out.printf("#      4. Gestion des Billets:                            #%n");
             System.out.printf("---------------------------------------------%n");
             System.out.printf("# Enter Number >>> ");
             choice = scanner.nextInt();
@@ -124,6 +126,7 @@ public class Main {
                 case 1 ->  partnerController.indexPartner();
                 case 2 -> contractController.indexContract();
                 case 3 -> promotionController.indexPromotion();
+                case 4 -> ticketController.indexTicket();
 
                 case 0 -> {
                     System.out.printf("---------------------------------------------%n");

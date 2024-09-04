@@ -121,14 +121,13 @@ public class PromotionalOffer {
 
 
     // display promotions :
-    public ResultSet displayromotions() {
+    public ResultSet displayPromotions() {
         String sql = "SELECT * FROM promotions";
         ResultSet resultPromotions = null;
 
         try {
 
             PreparedStatement stmt = connection.prepareStatement(sql);
-
             resultPromotions = stmt.executeQuery();
 
         } catch (Exception exception) {
@@ -180,11 +179,11 @@ public class PromotionalOffer {
             pstmt.setDate(3, java.sql.Date.valueOf(getStartDate()));
             pstmt.setDate(4, java.sql.Date.valueOf(getEndDate()));
 
-            pstmt.setObject(5, getDiscountType().toString(), java.sql.Types.OTHER); // Assuming `getDiscountType()` returns an enum
+            pstmt.setObject(5, getDiscountType().toString(), java.sql.Types.OTHER);
 
             pstmt.setString(6, getConditions());
 
-            pstmt.setObject(7, getOfferStatus().toString(), java.sql.Types.OTHER); // Assuming `getOfferStatus()` returns an enum
+            pstmt.setObject(7, getOfferStatus().toString(), java.sql.Types.OTHER);
 
             pstmt.setObject(8, getContractId(), java.sql.Types.OTHER);
             pstmt.setObject(9, id, java.sql.Types.OTHER);
