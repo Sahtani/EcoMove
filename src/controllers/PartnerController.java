@@ -86,7 +86,7 @@ public class PartnerController {
 
 
 
-    // add new book
+    // add new partner
 
       public void addPartner() {
 

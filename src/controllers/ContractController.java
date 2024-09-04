@@ -59,7 +59,6 @@ public class ContractController {
                     "Contract ID", "Partner ID", "Start Date", "End Date", "Special Rate", "Agreement Conditions", "Renewable", "Status");
             System.out.printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%n");
 
-            // Récupération de la liste des contrats
             ResultSet resultContracts = contract.index();
 
             while (resultContracts.next()) {
@@ -120,7 +119,6 @@ public class ContractController {
             UUID contractId = UUID.randomUUID();
             contract.setId(contractId);
 
-            // Appel de la méthode pour sauvegarder le contrat
             contract.store(contract);
 
             System.out.println("Contract created successfully.");

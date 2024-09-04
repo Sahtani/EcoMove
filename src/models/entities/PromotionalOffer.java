@@ -1,7 +1,7 @@
 package models.entities;
 
 import config.Db;
-import models.enums.TicketStatus;
+import models.enums.DiscountType;
 import models.enums.OfferStatus;
 
 import java.sql.*;
@@ -26,7 +26,7 @@ public class PromotionalOffer {
     private Connection connection;
 
     // Constructor
-    public Promotion(UUID id, String offerName, String description, LocalDate startDate, LocalDate endDate,
+    public PromotionalOffer(UUID id, String offerName, String description, LocalDate startDate, LocalDate endDate,
                      DiscountType discountType, String conditions, OfferStatus offerStatus, UUID contractId) {
         this.id = id;
         this.offerName = offerName;
@@ -41,7 +41,7 @@ public class PromotionalOffer {
     }
 
     // Default constructor
-    public Promotion() {
+    public PromotionalOffer() {
         this.connection = Db.getInstance().getConnection();
     }
 
@@ -119,10 +119,30 @@ public class PromotionalOffer {
         this.contractId = contractId;
     }
 
+
+    // display promotions :
+    public ResultSet displayromotions() {
+        String sql = "SELECT * FROM promotions";
+        ResultSet resultPromotions = null;
+
+        try {
+
+            PreparedStatement stmt = connection.prepareStatement(sql);
+
+            resultPromotions = stmt.executeQuery();
+
+        } catch (Exception exception) {
+            System.out.println("Statement Exception: " + exception.getMessage());
+            exception.printStackTrace();
+        }
+
+        return resultPromotions;
+    }
+
     // Method to store a Promotion
     public void store() {
-        String sql = "INSERT INTO promotions (id, offer_name, description, start_date, end_date, discount_type, " +
-                "conditions, offer_status, contract_id) VALUES (?, ?, ?, ?, ?, CAST(? AS discountType), ?, CAST(? AS offerStatus), ?)";
+        String sql = "INSERT INTO promotions (id, offername, description, startdate, enddate, discounttype, " +
+                "conditions, offerstatus, contractid) VALUES (?, ?, ?, ?, ?, CAST(? AS discountType), ?, CAST(? AS offerStatus), ?)";
 
         try {
             PreparedStatement pstmt = connection.prepareStatement(sql);
@@ -138,7 +158,7 @@ public class PromotionalOffer {
 
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows > 0) {
-                System.out.println("Promotion added successfully.");
+                System.out.println("Promotion test successfully.");
             } else {
                 System.out.println("Failed to add promotion.");
             }
@@ -148,4 +168,54 @@ public class PromotionalOffer {
             e.printStackTrace();
         }
     }
-}
+
+    public boolean updatePromo(UUID id) {
+        String query = "UPDATE promotions SET offername = ?, description = ?, startdate = ?, enddate = ?, discounttype = ?, conditions = ?, offerstatus = ?, contractid = ? WHERE id = ?";
+
+        try (Connection conn = Db.getInstance().getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, getOfferName());
+            pstmt.setString(2, getDescription());
+            pstmt.setDate(3, java.sql.Date.valueOf(getStartDate()));
+            pstmt.setDate(4, java.sql.Date.valueOf(getEndDate()));
+
+            pstmt.setObject(5, getDiscountType().toString(), java.sql.Types.OTHER); // Assuming `getDiscountType()` returns an enum
+
+            pstmt.setString(6, getConditions());
+
+            pstmt.setObject(7, getOfferStatus().toString(), java.sql.Types.OTHER); // Assuming `getOfferStatus()` returns an enum
+
+            pstmt.setObject(8, getContractId(), java.sql.Types.OTHER);
+            pstmt.setObject(9, id, java.sql.Types.OTHER);
+
+            int affectedRows = pstmt.executeUpdate();
+
+            return affectedRows > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+        // delete Promotion
+        public String destroy(UUID id) {
+            String resultMessage;
+            try {
+                PreparedStatement pstmt = connection.prepareStatement("DELETE FROM promotions WHERE id = ?");
+                pstmt.setObject(1, id, java.sql.Types.OTHER);
+                int rowsAffected = pstmt.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    resultMessage = "Promotion deleted successfully.";
+                } else {
+                    resultMessage = "No promotion found with the provided UUID.";
+                }
+            } catch (Exception exception) {
+                exception.printStackTrace();
+                resultMessage = "An error occurred while trying to delete the promotion.";
+            }
+            return resultMessage;
+        }
+
+    }

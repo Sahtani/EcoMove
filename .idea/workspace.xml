@@ -5,17 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="93d1df58-ca32-4534-bd22-912e8ed82ef7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/models/enums/TicketStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controllers/PromotionController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/Db.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/Db.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/ContractController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/ContractController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/PartnerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/PartnerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/entities/Contract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/entities/Contract.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/entities/Partner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/entities/Partner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/entities/PromotionalOffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/entities/PromotionalOffer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/entities/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/entities/Ticket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/enums/ContractStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/enums/ContractStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/enums/DiscountType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/enums/DiscountType.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,8 +21,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>

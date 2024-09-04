@@ -87,6 +87,7 @@
 import config.Db;
 import controllers.ContractController;
 import controllers.PartnerController;
+import controllers.PromotionController;
 
 import java.sql.Connection;
 import java.util.Scanner;
@@ -100,6 +101,8 @@ public class Main {
 
         PartnerController partnerController = new PartnerController();
         ContractController contractController=new ContractController();
+        PromotionController promotionController=new PromotionController();
+
         Scanner scanner = new Scanner(System.in);
         int choice = 0;
         do {
@@ -120,6 +123,7 @@ public class Main {
 
                 case 1 ->  partnerController.indexPartner();
                 case 2 -> contractController.indexContract();
+                case 3 -> promotionController.indexPromotion();
 
                 case 0 -> {
                     System.out.printf("---------------------------------------------%n");
